@@ -1,0 +1,26 @@
+{"response": [{
+      "question": "What is the capital city of Austria",
+      "answer": "Vienna",
+      "options": [
+        "Antananarivo",
+        "Vienna",
+        "Malabo",
+        "Vientiane"
+      ],
+      "category": "general",
+      "difficulty": "1"
+    },
+    {
+      "question": "What is the capital city of Afghanistan",
+      "answer": "Abu Dhabi",
+      "options": [
+        "Abu Dhabi",
+        "Kabul",
+        "Zagreb",
+        "Mexico City"
+      ],
+      "category": "general",
+      "difficulty": "1"
+    }
+  ]
+}
