@@ -16,7 +16,7 @@ public class TrivapiClientTest extends TestCase {
         final boolean[] called = {false};
         trivapiClient.makeRequest(new TrivapiRequest(), new OnSuccessListener() {
             @Override
-            public void onSuccess(@NonNull List<TrivapiResult> results) {
+            public void onSuccess(String url, @NonNull List<TrivapiResult> results) {
                 called[0] = true;
             }
         }, null);
@@ -32,7 +32,7 @@ public class TrivapiClientTest extends TestCase {
         final boolean[] called = {false};
         trivapiClient.makeRequest(new TrivapiRequest(), null, new OnFailureListener() {
             @Override
-            public void onFailure(TrivapiException exception) {
+            public void onFailure(String url, TrivapiException exception) {
                 called[0] = true;
             }
         });
@@ -48,7 +48,7 @@ public class TrivapiClientTest extends TestCase {
         final boolean[] called = {false};
         trivapiClient.makeRequest(TrivapiCategory.GENERAL, new TrivapiRequest(), new OnSuccessListener() {
             @Override
-            public void onSuccess(@NonNull List<TrivapiResult> results) {
+            public void onSuccess(String url, @NonNull List<TrivapiResult> results) {
                 called[0] = true;
             }
         }, null);
@@ -64,7 +64,7 @@ public class TrivapiClientTest extends TestCase {
         final boolean[] called = {false};
         trivapiClient.makeRequest(TrivapiCategory.GENERAL, new TrivapiRequest(), null, new OnFailureListener() {
             @Override
-            public void onFailure(TrivapiException exception) {
+            public void onFailure(String url, TrivapiException exception) {
                 called[0] = true;
             }
         });
@@ -78,7 +78,7 @@ public class TrivapiClientTest extends TestCase {
         @Override
         public void request(String url, OnFailureCallback onFailureCallback, OnSuccessCallback onSuccessCallback) {
 
-            onSuccessCallback.onSuccess("");
+            onSuccessCallback.onSuccess("", "");
 
         }
     }
@@ -88,7 +88,7 @@ public class TrivapiClientTest extends TestCase {
         @Override
         public void request(String url, OnFailureCallback onFailureCallback, OnSuccessCallback onSuccessCallback) {
 
-            onFailureCallback.onFailure(new IOException());
+            onFailureCallback.onFailure("", new IOException());
 
         }
     }

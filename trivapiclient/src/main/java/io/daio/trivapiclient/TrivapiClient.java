@@ -55,22 +55,22 @@ public class TrivapiClient {
         this.httpClient.request(urlString, new TrivapiHttpClient.OnFailureCallback() {
 
             @Override
-            public void onFailure(IOException ioException) {
+            public void onFailure(String url, IOException ioException) {
                 if (failureListener != null) {
-                    failureListener.onFailure(new TrivapiException(ioException.getMessage(), ioException));
+                    failureListener.onFailure(url, new TrivapiException(ioException.getMessage(), ioException));
                 }
             }
 
         }, new TrivapiHttpClient.OnSuccessCallback() {
 
             @Override
-            public void onSuccess(String resultBody) {
+            public void onSuccess(String url, String resultBody) {
                 if (successListener != null) {
                     try {
                         List<TrivapiResult> results = responseTransformer.transform(resultBody);
-                        successListener.onSuccess(results);
+                        successListener.onSuccess(url, results);
                     } catch (JSONException e) {
-                        failureListener.onFailure(new TrivapiException(e.getMessage(), e));
+                        failureListener.onFailure(url, new TrivapiException(e.getMessage(), e));
                     }
                 }
             }

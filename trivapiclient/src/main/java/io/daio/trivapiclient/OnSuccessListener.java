@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface OnSuccessListener {
 
-    void onSuccess(@NonNull List<TrivapiResult> results);
+    void onSuccess(String url, @NonNull List<TrivapiResult> results);
 
 }

@@ -2,6 +2,6 @@ package io.daio.trivapiclient;
 
 public interface OnFailureListener {
 
-    void onFailure(TrivapiException exception);
+    void onFailure(String url, TrivapiException exception);
 
 }
