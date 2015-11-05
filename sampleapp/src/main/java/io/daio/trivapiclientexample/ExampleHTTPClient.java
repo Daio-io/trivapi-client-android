@@ -1,42 +1,42 @@
 package io.daio.trivapiclientexample;
 
-import com.squareup.okhttp.Call;
-import com.squareup.okhttp.Callback;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import java.io.IOException;
 
 import io.daio.trivapiclient.TrivapiHttpClient;
 
-
+// Create a custom TrivapiHttpClient which wraps up Android Volley
 public class ExampleHTTPClient implements TrivapiHttpClient {
-    OkHttpClient ok = new OkHttpClient();
 
     @Override
     public void request(final String url,
                         final OnFailureCallback onFailureCallback,
                         final OnSuccessCallback onSuccessCallback) {
 
-        final Request request = new Request.Builder()
-                .url(url)
-                .build();
+        RequestQueue queue = Volley.newRequestQueue(App.getAppContext());
 
-        Call call = ok.newCall(request);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
 
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Request request, IOException e) {
-                onFailureCallback.onFailure(url, e);
-            }
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        onSuccessCallback.onSuccess(url, response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        onFailureCallback.onFailure(url, new IOException(error.getMessage()));
+                    }
 
-            @Override
-            public void onResponse(Response response) throws IOException {
-                System.out.println(request);
-                onSuccessCallback.onSuccess(url, response.body().string());
-            }
-        });
+                });
 
+        queue.add(stringRequest);
     }
 }
