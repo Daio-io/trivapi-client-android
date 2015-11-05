@@ -15,7 +15,7 @@ public final class ResponseTransformer {
 
         JSONObject responseObj = new JSONObject(response);
 
-        if (responseObj != null) {
+        if (responseObj.optJSONArray("response") == null) {
             return results;
         }
         JSONArray jsonArray = responseObj.getJSONArray("response");
