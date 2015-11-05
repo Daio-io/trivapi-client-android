@@ -22,4 +22,24 @@ public final class TrivapiUrlBuilder {
         return baseUrl + builtParams;
     }
 
+    public String build(String baseUrl, TrivapiCategory category, TrivapiRequest trivapiRequest) {
+
+        String categoryBaseUrl = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
+
+        categoryBaseUrl += stringFromCategory(category);
+
+        return build(categoryBaseUrl, trivapiRequest);
+    }
+
+    private String stringFromCategory(TrivapiCategory category) {
+        switch (category){
+            case SCIENCE:
+                return "science";
+            case MATHS:
+                return "maths";
+            default:
+                return "general";
+        }
+    }
+
 }

@@ -5,7 +5,7 @@ import java.io.IOException;
 public interface TrivapiHttpClient {
 
     interface OnFailureCallback {
-        void onFailure(IOException error);
+        void onFailure(IOException exception);
     }
 
     interface  OnSuccessCallback {

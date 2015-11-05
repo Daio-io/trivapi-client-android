@@ -21,7 +21,6 @@ public class TestUtils {
 
         } catch (IOException | ParseException ignored) {
             System.out.println(ignored.getLocalizedMessage());
-
         }
 
         return "";
