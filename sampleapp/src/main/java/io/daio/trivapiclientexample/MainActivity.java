@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
         enableButtons(false);
 
-        client.makeRequest(TrivapiCategory.GENERAL, request, new OnSuccessListener() {
+        client.makeRequest(request, new OnSuccessListener() {
             @Override
             public void onSuccess(String url, @NonNull List<TrivapiResult> results) {
                 currentResult = results.get(0);
