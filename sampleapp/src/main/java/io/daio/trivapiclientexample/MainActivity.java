@@ -104,17 +104,24 @@ public class MainActivity extends AppCompatActivity {
         client.makeRequest(request, new OnSuccessListener() {
             @Override
             public void onSuccess(String url, @NonNull List<TrivapiResult> results) {
-                currentResult = results.get(0);
-                set();
-
+                if (!results.isEmpty()) {
+                    currentResult = results.get(0);
+                    set();
+                } else {
+                    showFailureSnack();
+                }
             }
         }, new OnFailureListener() {
             @Override
             public void onFailure(String url, TrivapiException exception) {
-                Snackbar.make(findViewById(android.R.id.content), "Failed loading question!", Snackbar.LENGTH_LONG)
-                        .show();
+                showFailureSnack();
             }
         });
+    }
+
+    public void showFailureSnack(){
+        Snackbar.make(findViewById(android.R.id.content), "Failed loading question!", Snackbar.LENGTH_LONG)
+                .show();
     }
 
     private class OnClicky implements View.OnClickListener{
